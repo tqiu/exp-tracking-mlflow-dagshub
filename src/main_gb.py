@@ -4,9 +4,12 @@ import numpy as np
 import mlflow
 import matplotlib.pyplot as plt
 import seaborn as sns
+import dagshub
 
-mlflow.set_experiment("model-gb")
-mlflow.set_tracking_uri("http://127.0.0.1:5000")
+dagshub.init(repo_owner='tqiu', repo_name='exp-tracking-mlflow-dagshub', mlflow=True)
+
+mlflow.set_experiment("water-exp-gb")
+mlflow.set_tracking_uri("https://dagshub.com/tqiu/exp-tracking-mlflow-dagshub.mlflow")
 
 # %%
 data = pd.read_csv("data/water_potability.csv")
@@ -63,5 +66,5 @@ with mlflow.start_run():
 
     mlflow.log_artifact(__file__)
 
-    mlflow.set_tags({"model": "GradientBoostingClassifier", "author": "tqiu"})
+    mlflow.set_tags({"model": "GB", "author": "tqiu"})
 
